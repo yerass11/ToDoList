@@ -124,7 +124,7 @@ final class TaskListViewController: UIViewController {
 
 extension TaskListViewController: TaskListViewProtocol {
     func showTasks(_ tasks: [Task]) {
-        self.tasks = tasks.sorted { $0.dateCreated > $1.dateCreated }
+        self.tasks = tasks
         taskCountLabel.text = "\(tasks.count) Задач"
         tableView.reloadData()
     }
@@ -143,7 +143,9 @@ extension TaskListViewController: UITableViewDataSource {
         cell.configure(with: task)
 
         cell.onContextMenuRequested = { [weak self] in
-            guard let self = self else { return nil }
+            guard let self = self else {
+                return nil
+            }
             
             let edit = UIAction(title: "Редактировать", image: UIImage(systemName: "pencil")) { _ in
                 self.presenter.didTapTask(task)

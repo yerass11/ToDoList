@@ -26,7 +26,10 @@ final class TaskTableViewCell: UITableViewCell {
     
     @objc
     private func handleToggleCompletion() {
-        guard var task = task else { return }
+        guard var task = task else {
+            return
+        }
+
         task.isCompleted.toggle()
         onToggleCompletion?(task)
     }

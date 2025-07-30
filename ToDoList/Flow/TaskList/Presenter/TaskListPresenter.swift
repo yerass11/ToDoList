@@ -13,7 +13,9 @@ final class TaskListPresenter: TaskListPresenterProtocol {
     }
     
     func didTapAdd() {
-        guard let view = view as? UIViewController else { return }
+        guard let view = viewController else {
+            return
+        }
 
         router?.openNewTask(from: view) { [weak self] newTask in
             self?.interactor?.add(with: newTask)
@@ -49,7 +51,10 @@ final class TaskListPresenter: TaskListPresenterProtocol {
     }
     
     private func openTaskEditor(with task: Task) {
-        guard let view = view as? UIViewController else { return }
+        guard let view = viewController else {
+            return
+        }
+
         router?.openTaskDetail(from: view, task: task) { [weak self] updatedTask in
             self?.interactor?.update(with: updatedTask)
         }
@@ -58,10 +63,10 @@ final class TaskListPresenter: TaskListPresenterProtocol {
 
 extension TaskListPresenter: TaskListInteractorOutput {
     func tasksFetched(_ tasks: [Task]) {
-        view?.showTasks(tasks)
+        view?.showTasks(tasks.sorted { $0.dateCreated > $1.dateCreated })
     }
 
     func tasksFetchFailed(error: Error) {
-        view?.showError(error.localizedDescription)
+        view?.showError("Произошла ошибка при загрузке задач.")
     }
 }
