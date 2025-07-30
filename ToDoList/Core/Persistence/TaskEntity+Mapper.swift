@@ -1,8 +1,13 @@
-//
-//  TaskEntity+Mapper.swift
-//  ToDoList
-//
-//  Created by Yerasyl on 29.07.2025.
-//
-
 import Foundation
+
+extension TaskEntity {
+    func toDomainModel() -> Task {
+        Task(
+            id: self.id,
+            title: self.title ?? "",
+            description: self.descText ?? "",
+            dateCreated: self.dateCreated ?? Date(),
+            isCompleted: self.isCompleted
+        )
+    }
+}
