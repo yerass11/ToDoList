@@ -1,6 +1,6 @@
 import UIKit
 import SnapKit
-
+ 
 final class TaskTableViewCell: UITableViewCell {
     var onToggleCompletion: ((Task) -> Void)?
     var onTapDetails: (() -> Void)?
