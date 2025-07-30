@@ -1,8 +1,9 @@
-//
-//  Task.swift
-//  ToDoList
-//
-//  Created by Yerasyl on 29.07.2025.
-//
-
 import Foundation
+
+struct Task {
+    var id: Int64
+    var title: String
+    var description: String
+    var dateCreated: Date
+    var isCompleted: Bool
+}
